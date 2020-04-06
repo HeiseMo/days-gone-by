@@ -1,3 +1,10 @@
+let health = 100;
+let hunger = 100;
+let bodyTemperature = "Cold"
+let wood = 0;
+let food = 0;
+let completedDays = 0;
+
 //
 let i = 1;
 const txtReaderList = document.querySelectorAll(".textReader li");
@@ -8,7 +15,7 @@ document.getElementById("actionTest").onclick = function () {
     console.log(txtReaderList[0].innerText);
   }
 };
-//console.log(txtReaderList[0])
+
 
 ///Footer Functions
 

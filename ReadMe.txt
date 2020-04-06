@@ -3,7 +3,7 @@ Days Gone By
 
 Idea for the game in its shortest form: 
 
--Clicker game where you must complete certain actions to survive until help come along
+-Clicker game where you must complete certain actions to survive until help comes along
 
 Story:
 
@@ -18,12 +18,12 @@ Iteration 1:
 
 - Start screen with the story, explanations for the game and the goal. 
 - Create status for: 
-	health: health of the player out of 100, if it hits 0 game over, dependant on bodyTemperature and hunger status starving
-	hunger: maintained by eating food, low hunger = changes to starving status and actions will be slower, will be out of 100
-	bodyTemperature; maintained by feeding the fire with wood,
-	wood: can be harvested from the forest, will cost energy,
-	food: can be harvested by hunting, will cost energy,
-	daysPassed: total days passed, 
+	-health: health of the player out of 100, if it hits 0 game over, dependant on bodyTemperature and hunger status starving
+	-hunger: maintained by eating food, low hunger = changes to starving status and actions will be slower, will be out of 100
+	-bodyTemperature; maintained by feeding the fire with wood,
+	-wood: can be harvested from the forest, will cost energy,
+	-food: can be harvested by hunting, will cost energy,
+	-daysPassed: total days passed, 
 - Create a days counter for days passing.
 - Create status bar for; health,hunger,bodyTemperature
 - Create a wood collecting system
@@ -35,6 +35,10 @@ Iteration 2
 - Create environment(rooms), one camp site(room) and one river(room), depending on the room different actions can be taken depending on player status.
 - The rooms will be objects with pre defined resources in them.
 - Create object for weapons and traps.
+	-Weapons: Knife, Bow, Arrows
+	-Traps: Basic Quality Trap, Medium Quality Trap, High Quality Trap 
 - Create a food collection system connected to the weapons and trap available.
-- Improve health status by including hunger
+- Improve health status by including hunger.
+- Survive 365 days
+
 
