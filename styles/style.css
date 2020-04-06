@@ -161,12 +161,13 @@ body {
 
 
 .textReader {
-    width: 88vh;
+    width: 60vh;
 }
 
 .textReader>li {
     font-size: 30px;
     list-style-type: none;
+
     padding-bottom: 1vh;
     opacity: 1;
 }

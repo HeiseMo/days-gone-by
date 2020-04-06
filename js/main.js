@@ -1,21 +1,34 @@
 let health = 100;
 let hunger = 100;
-let bodyTemperature = "Cold"
+let bodyTemperature = "Cold";
 let wood = 0;
 let food = 0;
 let completedDays = 0;
-
+let txtReaderItemCount = 0;
+let j = 1;
 //
 let i = 1;
 const txtReaderList = document.querySelectorAll(".textReader li");
 document.getElementById("actionTest").onclick = function () {
   document.querySelector(".gameScreen span").innerText = i++;
-  if (txtReaderList[0].innerText === "") {
-    txtReaderList[0].innerText = "I was clicked";
-    console.log(txtReaderList[0].innerText);
-  }
+  fillTextReader(j++);
+
+
+
 };
 
+function fillTextReader(str) {
+    let newItem = document.createElement("LI");
+    let textnode = document.createTextNode(str);
+    newItem.appendChild(textnode);
+  
+   let list = document.getElementById("text-reader");
+    list.insertBefore(newItem, list.childNodes[0]);
+    const txtReaderList = document.querySelectorAll(".textReader li");
+    if(txtReaderList.length == 10){
+        console.log(list.removeChild(list.childNodes[9]))
+    }
+}
 
 ///Footer Functions
 
@@ -42,13 +55,10 @@ document.getElementById("switch").onclick = function () {
 //Share
 document.getElementById("play-button").onclick = function () {
   //Going to work this in later stage
-  document
-  .querySelector(".startGame")
-  .classList.toggle("startGameHidden");
+  document.querySelector(".startGame").classList.toggle("startGameHidden");
   document
     .querySelector(".globalScreenHidden")
     .classList.toggle("globalScreen");
-  console.log("clicked");
 };
 
 function lightsOn() {
