@@ -13,6 +13,7 @@ body {
     width: 100%;
     height: 100vh;
     color: rgb(37, 41, 43);
+    border-color: rgb(37, 41, 43);
 }
 
 .darkbg {
@@ -20,6 +21,7 @@ body {
     width: 100%;
     height: 100vh;
     color: #ECF0F1;
+    border-color: #ECF0F1;
 }
 
 .header {
@@ -40,15 +42,18 @@ body {
 
 @keyframes blink {
     0% {
-        background: #222
+        background: rgb(37, 41, 43);
+        color: #ECF0F1;
     }
 
     50% {
-        background: #ECF0F1
+        background: #ECF0F1;
+        color: rgb(37, 41, 43);
     }
 
     100% {
-        background: #222
+        background: rgb(37, 41, 43);
+        color: #ECF0F1;
     }
 }
 
@@ -58,22 +63,109 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    
+
 }
 
-.mainScreen{
-    border:solid black 2px;
+.startGame {
+    border: 0.05em solid;
     width: 100vh;
-    height: 45vh
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+
 }
 
-.textReader{
+.startGameHidden {
+    border: 0.05em solid;
     width: 100vh;
-    height: 45vh
+    height: 55vh;
+    display: none;
+
+}
+.startGameHeading {
+    border-bottom: 0.05em solid;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.textReader > li{
-    font-size: 32px;
+.startGameHeading > span {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 64px;
+}
+
+
+.startGameButton {
+    border-top: 0.05em solid;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playButton {
+    padding:0.46em 1.6em;
+    border-top:0.05em solid;
+    border-bottom:0.05em solid;
+    margin:0 0.2em 0.2em 0;
+    text-decoration:none;
+    text-align:center;
+    font-size: 24px;
+    animation: 5s;
+}
+
+.playButton:hover {
+    border-left:0.05em solid;
+    border-right:0.05em solid;
+}
+
+.instructions {
+    height: 40vh
+}
+
+.globalScreenHidden {
+    border: 0.05em solid;
+    width: 120vh;
+    height: 52vh;
+    display: flex;
+    flex-direction: row;
+    display: none;
+}
+
+.globalScreen {
+    border: 0.05em solid;
+    width: 120vh;
+    height: 52vh;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.gameLocations {
+    border-right: 0.05em solid;
+    width: 10vh;
+    height: 100%
+}
+
+.gameScreen {
+    width: 80vh;
+    height: 100%;
+}
+
+.activeItems {
+    border-left: 0.05em solid;
+    width: 20vh;
+    height: 100%
+}
+
+
+.textReader {
+    width: 88vh;
+}
+
+.textReader>li {
+    font-size: 30px;
     list-style-type: none;
     padding-bottom: 1vh;
     opacity: 1;
@@ -94,9 +186,9 @@ body {
 }
 
 .links li {
-    padding-right: 5vh;
+    padding-right: 2.5vh;
 }
 
 .links li:hover {
-    text-decoration:underline;
+    text-decoration: underline;
 }
