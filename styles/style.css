@@ -38,6 +38,12 @@ body {
     animation: blink 0.8s infinite;
     width: 0.2vh;
     height: 2vh;
+    margin-right: 2vh;
+}
+
+#daysGoneBy{
+    font-size: 24px;
+    font-weight: bold;
 }
 
 @keyframes blink {

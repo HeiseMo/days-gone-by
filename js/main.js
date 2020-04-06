@@ -12,9 +12,6 @@ const txtReaderList = document.querySelectorAll(".textReader li");
 document.getElementById("actionTest").onclick = function () {
   document.querySelector(".gameScreen span").innerText = i++;
   fillTextReader(j++);
-
-
-
 };
 
 function fillTextReader(str) {
@@ -59,6 +56,12 @@ document.getElementById("play-button").onclick = function () {
   document
     .querySelector(".globalScreenHidden")
     .classList.toggle("globalScreen");
+    var count=0;
+setInterval(function()
+{
+    document.getElementById("daysGoneBy").innerText = count += 1;
+    fillTextReader(count + ' Days have passed');
+},10000);
 };
 
 function lightsOn() {
