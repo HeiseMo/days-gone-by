@@ -78,8 +78,7 @@ function tempBar() {
     if(bodyTemperature >= 0){
       document.getElementById("tmpBar").style.width = bodyTemperature + '%';
     }
-    if(bodyTemperature <= 0) healthBar();
-
+    if(bodyTemperature <= 0) healthBar(); // I wanted to clearInterval() here and in the healthBar function check if bodyTemperature is <= 0 and the start ticking down health in that function
     }, 1000);
 }
 
