@@ -27,10 +27,38 @@
         <div id="game" class="globalScreenHidden">
 
             <div id="game-locations" class="gameLocations">
+                <div class="gameLocationButton">
+                    <span id= "location-button" class="activeLocationButton">Campsite</span>
+                </div>
+                <div class="gameLocationButton">
+                    <span id= "location-button" class="locationButton">Riverbank</span>
+                </div>
             </div>
             <div id="game-screen" class="gameScreen">
-                <button id="actionTest">Click Me!</button>
-                <span></span>
+                <!-- <button id="actionTest">Click Me!</button> -->
+                <!-- <span></span> -->
+                <div id="player-status" class="playerStatus">
+                    <div id="player-avatar-frame" class="playerAvatarFrame">
+                        <div id="player-avatar" class="playerAvatar"></div>
+                    </div>
+                    <div id="status-bars" class="statusBars">
+                        <div id="health" class="health">
+                        <div id="hBar" class="healthBar"></div>
+                        </div>
+                            <!-- Health(<span>100</span>)</div> -->
+                        <div id="temperature" class="temperature">
+                            <!-- Body Heat(<span>100</span>) -->
+                            <div id="tmpBar" class="temperatureBar">
+                            </div>
+                        </div>
+                        <div id="hunger" class="hunger">
+                            <!-- Hunger(<span>100</span>) -->
+                            <div id="hunBar" class="hungerBar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="player-inventory" class="playerInventory"></div>
             </div>
             <div id="active-items" class="activeItems">
 

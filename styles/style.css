@@ -1,201 +1,306 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
 
 .lightbg {
-    background-color: #ECF0F1;
-    width: 100%;
-    height: 100vh;
-    color: rgb(37, 41, 43);
-    border-color: rgb(37, 41, 43);
+  background-color: #ecf0f1;
+  width: 100%;
+  height: 100vh;
+  color: rgb(37, 41, 43);
+  border-color: rgb(37, 41, 43);
 }
 
 .darkbg {
-    background-color: rgb(37, 41, 43);
-    width: 100%;
-    height: 100vh;
-    color: #ECF0F1;
-    border-color: #ECF0F1;
+  background-color: rgb(37, 41, 43);
+  width: 100%;
+  height: 100vh;
+  color: #ecf0f1;
+  border-color: #ecf0f1;
 }
 
 .header {
-    width: 100%;
-    height: 2.5vh;
-    display: flex;
-    direction: row;
-    font-size: 20px;
+  width: 100%;
+  height: 2.5vh;
+  display: flex;
+  direction: row;
+  font-size: 20px;
 }
 
 .cursor {
-    line-height: 17px;
-    margin-left: 3px;
-    animation: blink 0.8s infinite;
-    width: 0.2vh;
-    height: 2vh;
-    margin-right: 2vh;
+  line-height: 17px;
+  margin-left: 3px;
+  animation: blink 0.8s infinite;
+  width: 0.2vh;
+  height: 2vh;
+  margin-right: 2vh;
 }
 
-#daysGoneBy{
-    font-size: 24px;
-    font-weight: bold;
+#daysGoneBy {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 @keyframes blink {
-    0% {
-        background: rgb(37, 41, 43);
-        color: #ECF0F1;
-    }
+  0% {
+    background: rgb(37, 41, 43);
+    color: #ecf0f1;
+  }
 
-    50% {
-        background: #ECF0F1;
-        color: rgb(37, 41, 43);
-    }
+  50% {
+    background: #ecf0f1;
+    color: rgb(37, 41, 43);
+  }
 
-    100% {
-        background: rgb(37, 41, 43);
-        color: #ECF0F1;
-    }
+  100% {
+    background: rgb(37, 41, 43);
+    color: #ecf0f1;
+  }
 }
 
 .main {
-    height: 95vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
+  height: 95vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .startGame {
-    border: 0.05em solid;
-    width: 100vh;
-    height: 55vh;
-    display: flex;
-    flex-direction: column;
-
+  border: 0.05em solid;
+  width: 100vh;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .startGameHidden {
-    border: 0.05em solid;
-    width: 100vh;
-    height: 55vh;
-    display: none;
-
+  border: 0.05em solid;
+  width: 100vh;
+  height: 55vh;
+  display: none;
 }
 .startGameHeading {
-    border-bottom: 0.05em solid;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border-bottom: 0.05em solid;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .startGameHeading > span {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    font-size: 64px;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 64px;
 }
 
-
 .startGameButton {
-    border-top: 0.05em solid;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border-top: 0.05em solid;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .playButton {
-    padding:0.46em 1.6em;
-    border-top:0.05em solid;
-    border-bottom:0.05em solid;
-    margin:0 0.2em 0.2em 0;
-    text-decoration:none;
-    text-align:center;
-    font-size: 24px;
-    animation: 5s;
+  padding: 0.46em 1.6em;
+  border-top: 0.05em solid;
+  border-bottom: 0.05em solid;
+  margin: 0 0.2em 0.2em 0;
+  text-decoration: none;
+  text-align: center;
+  font-size: 24px;
+  animation: 5s;
 }
 
 .playButton:hover {
-    border-left:0.05em solid;
-    border-right:0.05em solid;
+  border-left: 0.05em solid;
+  border-right: 0.05em solid;
 }
 
 .instructions {
-    height: 40vh
+  height: 40vh;
 }
 
 .globalScreenHidden {
-    border: 0.05em solid;
-    width: 120vh;
-    height: 52vh;
-    display: flex;
-    flex-direction: row;
-    display: none;
+  border: 0.05em solid;
+  width: 120vh;
+  height: 52vh;
+  display: flex;
+  flex-direction: row;
+  display: none;
 }
 
 .globalScreen {
-    border: 0.05em solid;
-    width: 120vh;
-    height: 52vh;
-    display: flex;
-    flex-direction: row;
+  border: 0.05em solid;
+  width: 130vh;
+  height: 52vh;
+  display: flex;
+  flex-direction: row;
 }
 
-
 .gameLocations {
-    border-right: 0.05em solid;
-    width: 10vh;
-    height: 100%
+  border-right: 0.05em solid;
+  width: 20vh;
+  height: 100%;
+}
+
+.gameLocationButton {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1vh;
+}
+
+.locationButton {
+  width: 10vh;
+  padding: 0.46em 1.6em;
+  border: 0.05em solid;
+  margin: 0 0.2em 0.2em 0;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+}
+
+.activeLocationButton {
+  width: 10vh;
+  padding: 0.46em 1.6em;
+  border: 0.05em solid;
+  margin: 0 0.2em 0.2em 0;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  text-decoration: underline;
 }
 
 .gameScreen {
-    width: 80vh;
-    height: 100%;
+  width: 80vh;
+  height: 100%;
+}
+
+.playerStatus {
+  width: 100%;
+  height: 70%;
+  border-bottom: 0.05em solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.playerAvatarFrame {
+  height: 15vh;
+  width: 15vh;
+  border: 0.05em solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playerAvatar {
+  height: 13vh;
+  width: 13vh;
+  border: 0.05em solid;
+}
+
+.statusBars {
+  height: 10vh;
+  width: 25vh;
+  margin-top: 1vh;
+  /* border: 1px solid black */
+}
+
+.health {
+  border: 0.05em solid;
+  height: 2vh;
+  margin-bottom: 1vh;
+  margin-top: 0.5vh;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.healthBar {
+  margin-top: 0.05vh;
+  height: 1.9vh;
+  margin-bottom: 1vh;
+  background-color: #e74c3c;
+}
+
+.temperature {
+  border: 0.05em solid;
+  height: 2vh;
+  margin-bottom: 1vh;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.temperatureBar {
+  margin-top: 0.05vh;
+  height: 1.9vh;
+  margin-bottom: 1vh;
+  background-color: #3498db;
+}
+
+.hunger {
+  border: 0.05em solid;
+  height: 2vh;
+  margin-bottom: 1vh;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.hungerBar {
+    margin-top: 0.05vh;
+    height: 1.9vh;
+    margin-bottom: 1vh;
+    background-color: #4cd137;
+  }
+.playerInventory {
+  width: 100%;
+  height: 30%;
 }
 
 .activeItems {
-    border-left: 0.05em solid;
-    width: 20vh;
-    height: 100%
+  border-left: 0.05em solid;
+  width: 20vh;
+  height: 100%;
 }
-
 
 .textReader {
-    width: 60vh;
+  width: 130vh;
 }
 
-.textReader>li {
-    font-size: 30px;
-    list-style-type: none;
+.textReader > li {
+  font-size: 30px;
+  list-style-type: none;
 
-    padding-bottom: 1vh;
-    opacity: 1;
+  padding-bottom: 1vh;
+  opacity: 1;
 }
-
 
 .links {
-    height: 2vh;
-    width: 100%;
-    font-size: 24px;
+  height: 2vh;
+  width: 100%;
+  font-size: 24px;
 }
 
 .links ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
 }
 
 .links li {
-    padding-right: 2.5vh;
+  padding-right: 2.5vh;
 }
 
 .links li:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
