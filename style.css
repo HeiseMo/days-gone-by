@@ -310,6 +310,12 @@ a {
   height: 100%;
 }
 
+#action-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: solid 1px;
+}
 
 .availableActions {
   height: 5vh;

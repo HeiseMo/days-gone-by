@@ -12,7 +12,7 @@ let txtReaderItemCount = 0;
 
 //
 
-//Global Ticker
+//Hunger Ticker
 let id = setInterval(function () {
   ticker++
   if (rawMeat >= 1) {
@@ -22,10 +22,10 @@ let id = setInterval(function () {
     } else if (hunger < 100 && hunger > 0) {
       hunger = hunger + 0.5;
       rawMeat = rawMeat - 1
-      document.querySelector("#meatList span").innerText = rawMeat;
+      document.querySelector("#rawMeatList span").innerText = rawMeat;
     }
   }
-  if (hunger == 0) {
+  if (hunger <= 1) {
     clearInterval(id)
   }
   console.log(ticker)
@@ -36,11 +36,13 @@ let id = setInterval(function () {
 document.getElementById("building-options").onclick = function () {
   document.getElementById("actionBox").classList.add("hidden")
   document.getElementById("buildingBox").classList.remove("hidden")
+  document.getElementById("action-header").innerText = "Building Options"
 }
 
 document.getElementById("action-options").onclick = function () {
   document.getElementById("actionBox").classList.remove("hidden")
   document.getElementById("buildingBox").classList.add("hidden")
+  document.getElementById("action-header").innerText = "Available Actions"
 }
 
 
@@ -85,6 +87,7 @@ document.getElementById("play-button").onclick = function () {
     .classList.toggle("globalScreen");
   daysPassing();
   storyIntro();
+  document.getElementById("action-header").innerText = "Available Actions"
   document.getElementById("hunBar").style.width = hunger + '%';
   let id = setInterval(function () {
     hunger--;
@@ -95,7 +98,10 @@ document.getElementById("play-button").onclick = function () {
       document.getElementById("hunBar").style.width = hunger + '%';
       document.querySelector('.hunStatusBarText span').innerText = hunger;
     }
-    if (hunger == 0) {
+    if (hunger < 1) {
+      hunger = 0;
+      document.getElementById("hunBar").style.width = hunger + '%';
+      document.querySelector('.hunStatusBarText span').innerText = hunger;
       fillTextReader('You collapse and starve to death on day ' + completedDays + ', oh well... you dont get the cake....');
       clearInterval(id);
     }
@@ -116,7 +122,7 @@ function daysPassing() {
       if (count == 1) return fillTextReader(count + ' Day has passed since the crash...');
       fillTextReader(count + ' Days have passed since the crash..');
     }
-  }, 10000);
+  }, 20000);
 }
 
 //Story Into Sequence
@@ -153,14 +159,13 @@ function healthBar() {
 
 //Collect Wood
 document.getElementById("wood-collection").onclick = function () {
-  wood++
+  wood += Math.round(Math.random() * 10)
   document.getElementById("wood-collection").classList.toggle("disabled")
-  let timeLeft = 1
+  let timeLeft = 7
   let id = setInterval(function () {
     timeLeft--
     if (timeLeft == 0) {
       document.getElementById("wood-collection").classList.toggle("disabled");
-      console.log(timeLeft);
       document.querySelector("#wood-collection span").innerText = '';
       clearInterval(id)
     } else if (timeLeft >= 0) {
@@ -172,12 +177,11 @@ document.getElementById("wood-collection").onclick = function () {
     console.log("Yes I got " + wood + ' pieces of wood!')
     document.querySelector("#woodList span").innerText = wood;
   }
-  if (wood == 5) {
+  if (wood >= 5) {
     toggleLightFire();
   }
-  if (wood == 15) {
+  if (wood >= 15) {
     toggleBuildTrap();
-    toggleCheckTrap();
   }
   if (wood % 5 == 0) {
     fillTextReader("You have collected " + wood + " pieces of wood.")
@@ -188,6 +192,11 @@ document.getElementById("wood-collection").onclick = function () {
 
 function toggleLightFire() {
   document.getElementById("light-fire").classList.toggle("disabled");
+}
+
+document.getElementById("light-fire").onclick = function () {
+  console.log("Clicked lighter")
+  document.getElementById("cook-raw-meat").classList.toggle("disabled");
 }
 
 document.getElementById("light-fire").onclick = function () {
@@ -213,21 +222,27 @@ document.getElementById("build-trap").onclick = function () {
   fillTextReader("You built a trap, you can check if you have caught anything!")
 }
 
+document.getElementById("check-trap").onclick = function () {
+  rawMeat += Math.round(Math.random() * 10)
+  document.querySelector("#rawMeatList span").innerText = rawMeat;
+  document.getElementById("check-trap").classList.toggle("disabled");
+  fillTextReader("You hear the trap go off... You obtained" + rawMeat + " pieces of raw meat!")
+}
 
 // Collect Meat
 
-document.getElementById("collect-meat").onclick = function () {
-  rawMeat++
-  hunger = hunger + 2;
-  console.log(hunger)
-  if (rawMeat > 0) {
-    console.log("Yes I got " + rawMeat + ' pieces of raw meat!')
-    document.querySelector("#meatList span").innerText = rawMeat;
-  }
-  if (rawMeat % 5 == 0) {
-    fillTextReader("You have collected " + rawMeat + " pieces of raw meat.")
-  }
-};
+// document.getElementById("collect-meat").onclick = function () {
+//   rawMeat++
+//   hunger = hunger + 2;
+//   console.log(hunger)
+//   if (rawMeat > 0) {
+//     console.log("Yes I got " + rawMeat + ' pieces of raw meat!')
+//     document.querySelector("#meatList span").innerText = rawMeat;
+//   }
+//   if (rawMeat % 5 == 0) {
+//     fillTextReader("You have collected " + rawMeat + " pieces of raw meat.")
+//   }
+// };
 
 
 
