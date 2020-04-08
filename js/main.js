@@ -11,22 +11,22 @@ let txtReaderItemCount = 0;
 //Global Ticker
 setInterval(function () {
   ticker++
-  if(rawMeat >= 1 ){
-    if(hunger >= 100){
+  if (rawMeat >= 1) {
+    if (hunger >= 100) {
       console.log("Already 100%")
       hunger = 100;
-    } else if(hunger < 100 && hunger > 0){
+    } else if (hunger < 100 && hunger > 0) {
       hunger = hunger + 0.5;
       rawMeat = rawMeat - 1
       document.querySelector("#meatList span").innerText = rawMeat;
     }
-}
+  }
 
-  if(hunger < 0){
+  if (hunger < 0) {
     location.reload();
   }
 
-console.log(ticker)
+  console.log(ticker)
 }, 1000);
 
 //
@@ -93,18 +93,18 @@ function storyIntro() {
   }, 1000);
 }
 
-  document.getElementById("hunBar").style.width = hunger + '%';
-  let id = setInterval(function () {
-    hunger--;
-    if (hunger >= 0) {
-      document.getElementById("hunBar").style.width = hunger + '%';
-      document.querySelector('.hunStatusBarText span').innerText = hunger;
-    }
-    if (hunger == 0) {
-      fillTextReader('You start to feel dizzy due to being so hungry! Look for food!');
-      clearInterval(id);
-    }
-  }, 1000);
+document.getElementById("hunBar").style.width = hunger + '%';
+let id = setInterval(function () {
+  hunger--;
+  if (hunger >= 0) {
+    document.getElementById("hunBar").style.width = hunger + '%';
+    document.querySelector('.hunStatusBarText span').innerText = hunger;
+  }
+  if (hunger == 0) {
+    fillTextReader('You start to feel dizzy due to being so hungry! Look for food!');
+    clearInterval(id);
+  }
+}, 1000);
 
 
 function healthBar() {
@@ -130,12 +130,12 @@ document.getElementById("wood-collection").onclick = function () {
   let timeLeft = 11
   let id = setInterval(function () {
     timeLeft--
-    if(timeLeft == 0){
+    if (timeLeft == 0) {
       document.getElementById("wood-collection").classList.toggle("disabled");
       console.log(timeLeft);
       document.querySelector("#wood-collection span").innerText = '';
       clearInterval(id)
-    } else if(timeLeft >= 0){
+    } else if (timeLeft >= 0) {
       document.querySelector("#wood-collection span").innerText = '(' + timeLeft + ')'
     }
   }, 1000)
