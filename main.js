@@ -9,25 +9,7 @@ let isFireActive = 0;
 let completedDays = 0;
 let txtReaderItemCount = 0;
 //Global Ticker
-setInterval(function () {
-  ticker++
-  if (rawMeat >= 1) {
-    if (hunger >= 100) {
-      console.log("Already 100%")
-      hunger = 100;
-    } else if (hunger < 100 && hunger > 0) {
-      hunger = hunger + 0.5;
-      rawMeat = rawMeat - 1
-      document.querySelector("#meatList span").innerText = rawMeat;
-    }
-  }
 
-  if (hunger < 0) {
-    location.reload();
-  }
-
-  console.log(ticker)
-}, 1000);
 
 //
 let i = 1;
@@ -65,6 +47,18 @@ document.getElementById("play-button").onclick = function () {
     .classList.toggle("globalScreen");
   daysPassing();
   storyIntro();
+  document.getElementById("hunBar").style.width = hunger + '%';
+let id = setInterval(function () {
+  hunger--;
+  if (hunger >= 0) {
+    document.getElementById("hunBar").style.width = hunger + '%';
+    document.querySelector('.hunStatusBarText span').innerText = hunger;
+  }
+  if (hunger == 0) {
+    fillTextReader('You start to feel dizzy due to being so hungry! Look for food!');
+    clearInterval(id);
+  }
+}, 1000);
 
 };
 
@@ -92,19 +86,6 @@ function storyIntro() {
     if (count > 4) clearInterval();
   }, 1000);
 }
-
-document.getElementById("hunBar").style.width = hunger + '%';
-let id = setInterval(function () {
-  hunger--;
-  if (hunger >= 0) {
-    document.getElementById("hunBar").style.width = hunger + '%';
-    document.querySelector('.hunStatusBarText span').innerText = hunger;
-  }
-  if (hunger == 0) {
-    fillTextReader('You start to feel dizzy due to being so hungry! Look for food!');
-    clearInterval(id);
-  }
-}, 1000);
 
 
 function healthBar() {

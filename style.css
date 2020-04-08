@@ -8,19 +8,19 @@ body {
   height: 100vh;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-.collapsed{
-    visibility: collapse;
+.collapsed {
+  visibility: collapse;
 }
 
-.disabled{
-    pointer-events: none;
- /* for "disabled" effect */
-    opacity: 0.5;
-    background: #CCC;
+.disabled {
+  pointer-events: none;
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background: #CCC;
 }
 
 .lightbg {
@@ -79,7 +79,7 @@ a{
 }
 
 .main {
-  height: 95vh;
+  height: 94vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -100,6 +100,7 @@ a{
   height: 55vh;
   display: none;
 }
+
 .startGameHeading {
   border-bottom: 0.05em solid;
   height: 10vh;
@@ -108,7 +109,7 @@ a{
   justify-content: center;
 }
 
-.startGameHeading > span {
+.startGameHeading>span {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 64px;
 }
@@ -151,7 +152,7 @@ a{
 }
 
 .globalScreen {
-    margin-top: 5vh;
+  margin-top: 5vh;
   border: 0.05em solid;
   width: 130vh;
   height: 52vh;
@@ -272,11 +273,11 @@ a{
 }
 
 .hungerBar {
-  margin-top: 0.05vh;
-  height: 1.9vh;
+  height: 2vh;
   margin-bottom: 1vh;
   background-color: #4cd137;
 }
+
 .playerInventory {
   width: 100%;
   height: 30%;
@@ -289,35 +290,76 @@ a{
 }
 
 .availableActions {
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1vh;
-  }
-  
-  .actionButton {
-    width: 15vh;
-    padding: 0.46em 1.6em;
-    border: 0.05em solid;
-    margin: 0 0.2em 0.2em 0;
-    text-decoration: none;
-    text-align: center;
-    font-size: 18px;
-    visibility: none;
-    cursor: pointer;
-  }
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1vh;
+}
+
+.actionButton {
+  width: 15vh;
+  padding: 0.46em 1.6em;
+  border: 0.05em solid;
+  margin: 0 0.2em 0.2em 0;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  visibility: none;
+  cursor: pointer;
+}
 
 .textReader {
   width: 130vh;
+  height: 50vh;
 }
 
-.textReader > li {
-  font-size: 30px;
-  list-style-type: none;
-
-  padding-bottom: 1vh;
+.textReader :nth-child(1) {
   opacity: 1;
+}
+
+.textReader :nth-child(2) {
+  opacity: 0.9;
+}
+
+.textReader :nth-child(3) {
+  opacity: 0.8;
+}
+
+.textReader :nth-child(4) {
+  opacity: 0.7;
+}
+
+.textReader :nth-child(5) {
+  opacity: 0.6;
+}
+
+.textReader :nth-child(6) {
+  opacity: 0.4;
+}
+
+.textReader :nth-child(7) {
+  opacity: 0.2;
+}
+
+.textReader :nth-child(8) {
+  opacity: 0.09;
+}
+
+.textReader :nth-child(9) {
+  opacity: 0.07;
+}
+
+
+.textReader>li {
+  font-size: 25px;
+  list-style-type: none;
+  margin-top: 0.5vh;
+
+}
+
+.footer {
+  height: 2vh;
 }
 
 .links {
