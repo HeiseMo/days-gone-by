@@ -49,6 +49,10 @@
                 </div>
               </div>
             </div>
+            <div class="options">
+                <div id="building-options" class="optionButton">Building Options</div>
+                <div id="action-options" class="optionButton">Available Actions</div>
+            </div>
           </div>
           <div id="player-inventory" class="playerInventory">
             <div id="invItems">
@@ -59,16 +63,25 @@
           </div>
         </div>
         <div id="active-items" class="activeItems">
-          <div class="availableActions">
+        <div id="actionBox" class="">
+            <div class="availableActions">
             <span id="wood-collection" class="actionButton">Collect Wood<span></span>
-          </div>
-          <div class="availableActions">
-            <span id="collect-meat" class="actionButton">Collect Meat</span>
-          </div>
-          <div class="availableActions">
-            <span id="light-fire" class="actionButton collapsed"
-              >Light Fire</span>
-          </div>
+            </div>
+            <div class="availableActions">
+            <span id="collect-meat" class="actionButton">Check Trap</span>
+            </div>
+        </div>
+        <div id="buildingBox" class="hidden">
+            <div class="availableActions">
+            <span id="build-trap" class="actionButton">Build Trap</span>
+            </div>
+            <div class="availableActions">
+            <span id="light-fire" class="actionButton">Light Fire</span>
+            </div>
+            <!-- <div class="availableActions">
+                <span id="collect-meat" class="actionButton">Collect Seeds</span>
+                </div> -->
+        </div>
         </div>
       </div>
       <div id="text-reader" class="textReader">

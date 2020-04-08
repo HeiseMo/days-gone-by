@@ -8,8 +8,11 @@ let cookedMeat = 0;
 let isFireActive = 0;
 let completedDays = 0;
 let txtReaderItemCount = 0;
+
+//
+
 //Global Ticker
-setInterval(function () {
+let id = setInterval(function () {
   ticker++
   if (rawMeat >= 1) {
     if (hunger >= 100) {
@@ -21,13 +24,29 @@ setInterval(function () {
       document.querySelector("#meatList span").innerText = rawMeat;
     }
   }
-
-  if (hunger < 0) {
-    location.reload();
+  if (hunger == 0) {
+    clearInterval(id)
   }
-
   console.log(ticker)
 }, 1000);
+
+
+// Buttons for Building and Actions
+document.getElementById("building-options").onclick = function () {
+  document.getElementById("actionBox").classList.add("hidden")
+  document.getElementById("buildingBox").classList.remove("hidden")
+}
+
+document.getElementById("action-options").onclick = function () {
+  document.getElementById("actionBox").classList.remove("hidden")
+  document.getElementById("buildingBox").classList.add("hidden")
+}
+
+
+// Disable by default
+
+document.getElementById("build-trap").classList.toggle("disabled");
+document.getElementById("light-fire").classList.toggle("disabled");
 
 //
 let i = 1;
@@ -66,27 +85,36 @@ document.getElementById("play-button").onclick = function () {
   daysPassing();
   storyIntro();
   document.getElementById("hunBar").style.width = hunger + '%';
-let id = setInterval(function () {
-  hunger--;
-  if (hunger >= 0) {
-    document.getElementById("hunBar").style.width = hunger + '%';
-    document.querySelector('.hunStatusBarText span').innerText = hunger;
-  }
-  if (hunger == 0) {
-    fillTextReader('You start to feel dizzy due to being so hungry! Look for food!');
-    clearInterval(id);
-  }
-}, 1000);
+  let id = setInterval(function () {
+    hunger--;
+    if (hunger >= 100) {
+      hunger = 100;
+    }
+    if (hunger >= 0) {
+      document.getElementById("hunBar").style.width = hunger + '%';
+      document.querySelector('.hunStatusBarText span').innerText = hunger;
+    }
+    if (hunger == 0) {
+      fillTextReader('You collapse and starve to death on day ' + completedDays + ', you dont get the cake....');
+      clearInterval(id);
+    }
+  }, 1000);
 
 };
 
 //Function for Days passing by
 function daysPassing() {
   let count = 0;
-  setInterval(function () {
-    document.getElementById("daysGoneBy").innerText = count += 1;
-    if (count == 1) return fillTextReader(count + ' Day has passed since the crash...');
-    fillTextReader(count + ' Days have passed since the crash..');;
+  let id = setInterval(function () {
+    completedDays = count++;
+    if (hunger == 1) {
+      clearInterval(id)
+    }
+    if (hunger > 1) {
+      document.getElementById("daysGoneBy").innerText = completedDays += 1;
+      if (count == 1) return fillTextReader(count + ' Day has passed since the crash...');
+      fillTextReader(count + ' Days have passed since the crash..');
+    }
   }, 10000);
 }
 
@@ -100,7 +128,7 @@ function storyIntro() {
     if (count == 2) return fillTextReader('The seat you were sitting on somehow managed to end up a couple of meters away from you, but the rest of the plane is missing.')
     if (count == 3) return fillTextReader('The smell you noticed before is still present and you assume its the plane, you just cant see it.')
     if (count == 4) return fillTextReader('You start to shiver, as you just notice how cold it is.')
-    if (count == 5) return fillTextReader('You notice some wood around your location.')
+    if (count == 5) return fillTextReader('You notice some branches around your location.')
     if (count > 4) clearInterval();
   }, 1000);
 }
@@ -114,7 +142,7 @@ function healthBar() {
       document.querySelector('.hStatusBarText span').innerText = health;
     }
     if (health == 0) {
-      fillTextReader('You start to shiver due to feeling so cold! Go feed the fire!');
+      fillTextReader('You start to shiver and starve to death on ' + completedDays + 'QQ');
       location.reload()
       clearInterval(id)
     }
@@ -126,7 +154,7 @@ function healthBar() {
 document.getElementById("wood-collection").onclick = function () {
   wood++
   document.getElementById("wood-collection").classList.toggle("disabled")
-  let timeLeft = 11
+  let timeLeft = 1
   let id = setInterval(function () {
     timeLeft--
     if (timeLeft == 0) {
@@ -154,7 +182,7 @@ document.getElementById("wood-collection").onclick = function () {
 // Light Fire
 
 function toggleLightFire() {
-  document.getElementById("light-fire").classList.toggle("collapsed")
+  document.getElementById("light-fire").classList.toggle("disabled");
 }
 
 document.getElementById("light-fire").onclick = function () {
