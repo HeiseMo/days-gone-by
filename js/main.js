@@ -1,10 +1,33 @@
+let ticker = 0;
 let health = 100;
 let hunger = 100;
 let bodyTemperature = 100;
 let wood = 0;
-let food = 0;
+let rawMeat = 0;
+let cookedMeat = 0;
+let isFireActive = 0;
 let completedDays = 0;
 let txtReaderItemCount = 0;
+//Global Ticker
+setInterval(function () {
+  ticker++
+  if(rawMeat >= 1 ){
+    if(hunger >= 100){
+      console.log("Already 100%")
+      hunger = 100;
+    } else if(hunger < 100 && hunger > 0){
+      hunger = hunger + 0.5;
+      rawMeat = rawMeat - 1
+      document.querySelector("#meatList span").innerText = rawMeat;
+    }
+}
+
+  if(hunger < 0){
+    location.reload();
+  }
+
+console.log(ticker)
+}, 1000);
 
 //
 let i = 1;
@@ -40,10 +63,9 @@ document.getElementById("play-button").onclick = function () {
   document
     .querySelector(".globalScreenHidden")
     .classList.toggle("globalScreen");
-  tempBar();
-  hungBar();
   daysPassing();
   storyIntro();
+
 };
 
 //Function for Days passing by
@@ -52,8 +74,9 @@ function daysPassing() {
   setInterval(function () {
     document.getElementById("daysGoneBy").innerText = count += 1;
     if (count == 1) return fillTextReader(count + ' Day has passed since the crash...');
-    fillTextReader(count + ' Days have passed since the crash..');
-  }, 10000);}
+    fillTextReader(count + ' Days have passed since the crash..');;
+  }, 10000);
+}
 
 //Story Into Sequence
 
@@ -70,35 +93,94 @@ function storyIntro() {
   }, 1000);
 }
 
-
-function tempBar() {
-  if(bodyTemperature == 0)fillTextReader('You start to shiver due to feeling so cold!');
-  setInterval(function () {
-    bodyTemperature--;
-    if(bodyTemperature >= 0){
-      document.getElementById("tmpBar").style.width = bodyTemperature + '%';
-    }
-    if(bodyTemperature <= 0) healthBar(); // I wanted to clearInterval() here and in the healthBar function check if bodyTemperature is <= 0 and the start ticking down health in that function
-    }, 1000);
-}
-
-function hungBar() {
-  if(hunger == 0)fillTextReader('You start to shiver due to feeling so cold!');
-  setInterval(function () {
+  document.getElementById("hunBar").style.width = hunger + '%';
+  let id = setInterval(function () {
     hunger--;
-    if(hunger >= 0){
+    if (hunger >= 0) {
       document.getElementById("hunBar").style.width = hunger + '%';
+      document.querySelector('.hunStatusBarText span').innerText = hunger;
     }
-    if(hunger <= 0) healthBar();
+    if (hunger == 0) {
+      fillTextReader('You start to feel dizzy due to being so hungry! Look for food!');
+      clearInterval(id);
+    }
+  }, 1000);
 
-    }, 1000);
+
+function healthBar() {
+  document.getElementById("hBar").style.width = health + '%';
+  let id = setInterval(function () {
+    if (bodyTemperature == 0) {
+      health--;
+      document.querySelector('.hStatusBarText span').innerText = health;
+    }
+    if (health == 0) {
+      fillTextReader('You start to shiver due to feeling so cold! Go feed the fire!');
+      location.reload()
+      clearInterval(id)
+    }
+  }, 1000);
 }
 
 
-function healthBar(){
-        health--;
-        document.getElementById("hBar").style.width = health + '%'; 
+//Collect Wood
+document.getElementById("wood-collection").onclick = function () {
+  wood++
+  document.getElementById("wood-collection").classList.toggle("disabled")
+  let timeLeft = 11
+  let id = setInterval(function () {
+    timeLeft--
+    if(timeLeft == 0){
+      document.getElementById("wood-collection").classList.toggle("disabled");
+      console.log(timeLeft);
+      document.querySelector("#wood-collection span").innerText = '';
+      clearInterval(id)
+    } else if(timeLeft >= 0){
+      document.querySelector("#wood-collection span").innerText = '(' + timeLeft + ')'
     }
+  }, 1000)
+
+  if (wood > 0) {
+    console.log("Yes I got " + wood + ' pieces of wood!')
+    document.querySelector("#woodList span").innerText = wood;
+  }
+  if (wood == 5) {
+    toggleLightFire();
+  }
+  if (wood % 5 == 0) {
+    fillTextReader("You have collected " + wood + " pieces of wood.")
+  }
+};
+
+// Light Fire
+
+function toggleLightFire() {
+  document.getElementById("light-fire").classList.toggle("collapsed")
+}
+
+document.getElementById("light-fire").onclick = function () {
+  wood = wood - 5
+  document.querySelector("#woodList span").innerText = wood;
+  if (wood < 5) {
+    toggleLightFire();
+  }
+  fillTextReader("You lit a fire, you never felt so warm before.")
+}
+
+// Collect Meat
+
+document.getElementById("collect-meat").onclick = function () {
+  rawMeat++
+  hunger = hunger + 2;
+  console.log(hunger)
+  if (rawMeat > 0) {
+    console.log("Yes I got " + rawMeat + ' pieces of raw meat!')
+    document.querySelector("#meatList span").innerText = rawMeat;
+  }
+  if (rawMeat % 5 == 0) {
+    fillTextReader("You have collected " + rawMeat + " pieces of raw meat.")
+  }
+};
 
 // Functions for color switch
 
@@ -111,6 +193,8 @@ function lightsOff() {
   document.getElementById("switch").innerHTML = "lightMode";
   document.getElementById("mode").className = "darkbg";
 }
+
+// Text Reader
 
 function fillTextReader(str) {
   let newItem = document.createElement("LI");

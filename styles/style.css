@@ -8,6 +8,21 @@ body {
   height: 100vh;
 }
 
+a{
+    text-decoration: none;
+}
+
+.collapsed{
+    visibility: collapse;
+}
+
+.disabled{
+    pointer-events: none;
+ /* for "disabled" effect */
+    opacity: 0.5;
+    background: #CCC;
+}
+
 .lightbg {
   background-color: #ecf0f1;
   width: 100%;
@@ -136,6 +151,7 @@ body {
 }
 
 .globalScreen {
+    margin-top: 5vh;
   border: 0.05em solid;
   width: 130vh;
   height: 52vh;
@@ -236,15 +252,14 @@ body {
   border: 0.05em solid;
   height: 2vh;
   margin-bottom: 1vh;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
+
 .temperatureBar {
   margin-top: 0.05vh;
   height: 1.9vh;
   margin-bottom: 1vh;
   background-color: #3498db;
+
 }
 
 .hunger {
@@ -257,11 +272,11 @@ body {
 }
 
 .hungerBar {
-    margin-top: 0.05vh;
-    height: 1.9vh;
-    margin-bottom: 1vh;
-    background-color: #4cd137;
-  }
+  margin-top: 0.05vh;
+  height: 1.9vh;
+  margin-bottom: 1vh;
+  background-color: #4cd137;
+}
 .playerInventory {
   width: 100%;
   height: 30%;
@@ -269,9 +284,29 @@ body {
 
 .activeItems {
   border-left: 0.05em solid;
-  width: 20vh;
+  width: 30vh;
   height: 100%;
 }
+
+.availableActions {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1vh;
+  }
+  
+  .actionButton {
+    width: 15vh;
+    padding: 0.46em 1.6em;
+    border: 0.05em solid;
+    margin: 0 0.2em 0.2em 0;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    visibility: none;
+    cursor: pointer;
+  }
 
 .textReader {
   width: 130vh;

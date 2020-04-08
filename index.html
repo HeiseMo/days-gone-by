@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Days Gone By</title>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-<section class="header">
-    <span>>>:Days Gone By</span>  
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <section class="header">
+    <span>>>:Days Gone By</span>
     <div class="cursor"></div>
     <span id="daysGoneBy"></span>
-</section>
+  </section>
 
-<body id="mode" class="lightbg">
+  <body id="mode" class="lightbg">
     <section class="main">
-        <div id="start-game" class="startGame">
-            <div class="startGameHeading">
-                <span>Days Gone By</span>
-            </div>
-            <div class="instructions">
-
-            </div>
-            <div class="startGameButton">
-                <span id= "play-button" class="playButton">Click To Begin</span>
-            </div>
+      <div id="start-game" class="startGame">
+        <div class="startGameHeading">
+          <span>Days Gone By</span>
         </div>
-        <div id="game" class="globalScreenHidden">
-
-            <div id="game-locations" class="gameLocations">
-                <div class="gameLocationButton">
-                    <span id= "location-button" class="activeLocationButton">Campsite</span>
-                </div>
-                <div class="gameLocationButton">
-                    <span id= "location-button" class="locationButton">Riverbank</span>
-                </div>
-            </div>
-            <div id="game-screen" class="gameScreen">
-                <!-- <button id="actionTest">Click Me!</button> -->
-                <!-- <span></span> -->
-                <div id="player-status" class="playerStatus">
-                    <div id="player-avatar-frame" class="playerAvatarFrame">
-                        <div id="player-avatar" class="playerAvatar"></div>
-                    </div>
-                    <div id="status-bars" class="statusBars">
-                        <div id="health" class="health">
-                        <div id="hBar" class="healthBar"></div>
-                        </div>
-                            <!-- Health(<span>100</span>)</div> -->
-                        <div id="temperature" class="temperature">
-                            <!-- Body Heat(<span>100</span>) -->
-                            <div id="tmpBar" class="temperatureBar">
-                            </div>
-                        </div>
-                        <div id="hunger" class="hunger">
-                            <!-- Hunger(<span>100</span>) -->
-                            <div id="hunBar" class="hungerBar">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="player-inventory" class="playerInventory"></div>
-            </div>
-            <div id="active-items" class="activeItems">
-
-            </div>
+        <div class="instructions"></div>
+        <div class="startGameButton">
+          <span id="play-button" class="playButton">Click To Begin</span>
         </div>
-        <div id="text-reader" class="textReader">
-
-            <!-- <li style="opacity: 0.9;"></li>
+      </div>
+      <div id="game" class="globalScreenHidden">
+        <div id="game-locations" class="gameLocations">
+          <div class="gameLocationButton">
+            <span id="location-button" class="activeLocationButton"
+              >Campsite</span
+            >
+          </div>
+          <div class="gameLocationButton">
+            <span id="location-button" class="locationButton">Riverbank</span>
+          </div>
+        </div>
+        <div id="game-screen" class="gameScreen">
+          <div id="player-status" class="playerStatus">
+            <div id="player-avatar-frame" class="playerAvatarFrame">
+              <div id="player-avatar" class="playerAvatar"></div>
+            </div>
+            <div id="status-bars" class="statusBars">
+              <div id="health" class="health">
+                <div id="hBar" class="healthBar">
+                  <div class="hStatusBarText">Health(<span>100</span>)</div>
+                </div>
+              </div>
+              <div id="hunger" class="hunger">
+                <div id="hunBar" class="hungerBar">
+                  <div class="hunStatusBarText">Hunger(<span>100</span>)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="player-inventory" class="playerInventory">
+            <div id="invItems">
+              <li id="woodList">Wood: <span></span></li>
+              <li id="meatList">Raw Meat: <span></span></li>
+              <li id="cookedMeatList">Cooked Meat: <span></span></li>
+            </div>
+          </div>
+        </div>
+        <div id="active-items" class="activeItems">
+          <div class="availableActions">
+            <span id="wood-collection" class="actionButton">Collect Wood<span></span>
+          </div>
+          <div class="availableActions">
+            <span id="collect-meat" class="actionButton">Collect Meat</span>
+          </div>
+          <div class="availableActions">
+            <span id="light-fire" class="actionButton collapsed"
+              >Light Fire</span>
+          </div>
+        </div>
+      </div>
+      <div id="text-reader" class="textReader">
+        <!-- <li style="opacity: 0.9;"></li>
             <li style="opacity: 0.8;"></li>
             <li style="opacity: 0.7;"></li>
             <li style="opacity: 0.6;"></li>
@@ -76,19 +82,18 @@
             <li style="opacity: 0.2;"></li>
             <li style="opacity: 0.1;"></li>
             <li style="opacity: 0.07;"></li> -->
-        </div>
+      </div>
     </section>
     <section class="footer">
-        <div class="links">
-            <ul>
-                <li id="restartGame">restartGame</li>
-                <li id="github">github</li>
-                <li id="share">share</li>
-                <li id="switch">darkMode</li>
-            </ul>
-        </div>
+      <div class="links">
+        <ul>
+          <li id="restartGame">restartGame</li>
+          <li id="github">github</li>
+          <li id="share">share</li>
+          <li id="switch">darkMode</li>
+        </ul>
+      </div>
     </section>
-</body>
-<script src="js/main.js"></script>
-
+  </body>
+  <script src="js/main.js"></script>
 </html>
