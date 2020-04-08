@@ -6,6 +6,7 @@ let wood = 0;
 let rawMeat = 0;
 let cookedMeat = 0;
 let isFireActive = 0;
+let isTrapBuilt = 0;
 let completedDays = 0;
 let txtReaderItemCount = 0;
 
@@ -95,7 +96,7 @@ document.getElementById("play-button").onclick = function () {
       document.querySelector('.hunStatusBarText span').innerText = hunger;
     }
     if (hunger == 0) {
-      fillTextReader('You collapse and starve to death on day ' + completedDays + ', you dont get the cake....');
+      fillTextReader('You collapse and starve to death on day ' + completedDays + ', oh well... you dont get the cake....');
       clearInterval(id);
     }
   }, 1000);
@@ -174,6 +175,10 @@ document.getElementById("wood-collection").onclick = function () {
   if (wood == 5) {
     toggleLightFire();
   }
+  if (wood == 15) {
+    toggleBuildTrap();
+    toggleCheckTrap();
+  }
   if (wood % 5 == 0) {
     fillTextReader("You have collected " + wood + " pieces of wood.")
   }
@@ -194,6 +199,21 @@ document.getElementById("light-fire").onclick = function () {
   fillTextReader("You lit a fire, you never felt so warm before.")
 }
 
+// Build Trap
+function toggleBuildTrap() {
+  document.getElementById("build-trap").classList.toggle("disabled");
+}
+document.getElementById("build-trap").onclick = function () {
+  wood = wood - 15
+  document.querySelector("#woodList span").innerText = wood;
+  if (wood < 15) {
+    toggleBuildTrap();
+  }
+  document.getElementById("check-trap").classList.toggle("disabled");
+  fillTextReader("You built a trap, you can check if you have caught anything!")
+}
+
+
 // Collect Meat
 
 document.getElementById("collect-meat").onclick = function () {
@@ -208,6 +228,8 @@ document.getElementById("collect-meat").onclick = function () {
     fillTextReader("You have collected " + rawMeat + " pieces of raw meat.")
   }
 };
+
+
 
 // Functions for color switch
 
