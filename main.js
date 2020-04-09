@@ -3,6 +3,8 @@ let health = 100;
 let hunger = 100;
 let bodyTemperature = 100;
 let wood = 0;
+let stone = 0;
+let bamboo = 0;
 let rawMeat = 0;
 let cookedMeat = 0;
 let isFireActive = 0;
@@ -268,6 +270,58 @@ document.getElementById("wood-collection").onclick = function () {
     fillTextReader("You have collected " + wood + " pieces of wood.")
   }
 };
+
+//Collect Stone
+document.getElementById("stone-collection").onclick = function () {
+  rand = Math.round(Math.random() * 10)
+  stone += (rand * 2)
+  document.getElementById("stone-collection").classList.toggle("disabled")
+  let timeLeft = 6
+  let id = setInterval(function () {
+    timeLeft--
+    if (timeLeft == 0) {
+      document.getElementById("stone-collection").classList.toggle("disabled");
+      document.querySelector("#stone-collection span").innerText = '';
+      clearInterval(id)
+    } else if (timeLeft >= 0) {
+      document.querySelector("#stone-collection span").innerText = '(' + timeLeft + ')'
+    }
+  }, 1000)
+
+  if (stone > 0) {
+    console.log("Yes I got " + stone + ' pieces of stone!')
+    document.querySelector("#stoneList span").innerText = stone;
+  }
+  if (stone % 5 == 0) {
+    fillTextReader("You have collected " + stone + " pieces of stone.")
+  }
+};
+
+//Collect Bamboo
+document.getElementById("bamboo-collection").onclick = function () {
+  bamboo += 1;
+  document.getElementById("bamboo-collection").classList.toggle("disabled")
+  let timeLeft = 1
+  let id = setInterval(function () {
+    timeLeft--
+    if (timeLeft == 0) {
+      document.getElementById("bamboo-collection").classList.toggle("disabled");
+      document.querySelector("#bamboo-collection span").innerText = '';
+      clearInterval(id)
+    } else if (timeLeft >= 0) {
+      document.querySelector("#bamboo-collection span").innerText = '(' + timeLeft + ')'
+    }
+  }, 1000)
+
+  if (bamboo > 0) {
+    console.log("Yes I got " + bamboo + ' pieces of bamboo!')
+    document.querySelector("#bambooList span").innerText = bamboo;
+  }
+  if (bamboo % 5 == 0) {
+    fillTextReader("You have collected " + bamboo + " pieces of bamboo.")
+  }
+};
+
 
 // Light Fire
 
