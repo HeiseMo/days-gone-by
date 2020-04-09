@@ -13,6 +13,9 @@ let completedDays = 0;
 let txtReaderItemCount = 0;
 let isRiverside = 1;
 let campsite = 0;
+let toggleBearAttack = 0;
+let totalBattle = 0;
+let hasAttackedBear = 0;
 //
 console.log(document.getElementById("put-out-fire").parentElement)
 
@@ -49,6 +52,8 @@ let id = setInterval(function () {
     document.getElementById("cook-raw-meat").classList.add("hidden");
     document.getElementById("building-options").classList.remove("optionButton");
     document.getElementById("building-options").classList.add("hidden");
+    document.getElementById("bear-attack").parentElement.classList.remove("availableActions")
+    document.getElementById("bear-attack").classList.add("hidden")
   }
   if (campsite == 0) {
     document.getElementById("wood-collection").parentElement.classList.add("availableActions");
@@ -61,6 +66,18 @@ let id = setInterval(function () {
     document.getElementById("cook-raw-meat").classList.remove("hidden");
     document.getElementById("building-options").classList.add("optionButton");
     document.getElementById("building-options").classList.remove("hidden");
+    document.getElementById("bear-attack").parentElement.classList.remove("availableActions")
+    document.getElementById("bear-attack").classList.add("hidden")
+
+  }
+  //Toggle Bear Attack
+  if (toggleBearAttack == 0 && campsite == 0) {
+    document.getElementById("bear-attack").parentElement.classList.remove("availableActions")
+    document.getElementById("bear-attack").classList.add("hidden")
+  }
+  if (toggleBearAttack == 1 && campsite == 0) {
+    document.getElementById("bear-attack").parentElement.classList.add("availableActions")
+    document.getElementById("bear-attack").classList.remove("hidden")
   }
   //Check if riverside location is active
   if (isFireActive == 1 && isTrapBuilt == 1) {
@@ -143,9 +160,6 @@ document.getElementById("action-options").onclick = function () {
 document.getElementById("build-trap").classList.toggle("disabled");
 document.getElementById("light-fire").classList.toggle("disabled");
 
-//
-let i = 1;
-const txtReaderList = document.querySelectorAll(".textReader li");
 
 //Restart Game
 document.getElementById("restartGame").onclick = function () {
@@ -362,7 +376,7 @@ document.getElementById("check-trap").onclick = function () {
   document.getElementById("check-trap").classList.add("hidden")
   fillTextReader("You hear the trap go off... You obtained " + rawMeat + " pieces of raw meat!")
 }
-
+// Cook Raw Meat
 document.getElementById("cook-raw-meat").onclick = function () {
   if (rawMeat >= 1) {
     rawMeat--
@@ -370,20 +384,21 @@ document.getElementById("cook-raw-meat").onclick = function () {
   }
 }
 
-// Collect Meat
-
-// document.getElementById("collect-meat").onclick = function () {
-//   rawMeat++
-//   hunger = hunger + 2;
-//   console.log(hunger)
-//   if (rawMeat > 0) {
-//     console.log("Yes I got " + rawMeat + ' pieces of raw meat!')
-//     document.querySelector("#meatList span").innerText = rawMeat;
-//   }
-//   if (rawMeat % 5 == 0) {
-//     fillTextReader("You have collected " + rawMeat + " pieces of raw meat.")
-//   }
-// };
+// Bear Attack
+document.getElementById("bear-attack").onclick = function () {
+  document.getElementById("bear-attack").classList.toggle("disabled")
+  let timeLeft = 5
+  let id = setInterval(function () {
+    timeLeft--
+    if (timeLeft == 0) {
+      document.getElementById("bear-attack").classList.toggle("disabled");
+      hasAttackedBear++
+      clearInterval(id)
+    } else if (timeLeft >= 0) {
+      document.querySelector("#bear-attack span").innerText = '(' + timeLeft + ')'
+    }
+  }, 1000)
+}
 
 document.getElementById("riverside").onclick = function () {
   document.getElementById("riverside").classList.remove("locationButton")
@@ -417,6 +432,9 @@ function lightsOff() {
 }
 
 // Text Reader
+//
+let i = 1;
+const txtReaderList = document.querySelectorAll(".textReader li");
 
 function fillTextReader(str) {
   let newItem = document.createElement("LI");
@@ -428,5 +446,29 @@ function fillTextReader(str) {
   const txtReaderList = document.querySelectorAll(".textReader li");
   if (txtReaderList.length == 10) {
     list.removeChild(list.childNodes[9])
+  }
+}
+
+//modal
+let modal = document.getElementById("myModal");
+
+let btn = document.getElementById("strange-device");
+
+let span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function () {
+  modal.style.display = "block";
+  document.getElementById("strange-device").classList.toggle("disabled");
+  fillTextReader("Warning!!! Th5/3-1-11-5/is/1/12-9-5")
+  toggleBearAttack = 1
+}
+
+span.onclick = function () {
+  modal.style.display = "none";
+}
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
   }
 }
