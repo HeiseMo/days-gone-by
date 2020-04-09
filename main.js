@@ -9,12 +9,26 @@ let isFireActive = 0;
 let isTrapBuilt = 0;
 let completedDays = 0;
 let txtReaderItemCount = 0;
-
 //
 
 //Hunger Ticker
 let id = setInterval(function () {
   ticker++
+  //Check if Fire is build and meat can be cooked
+  if (rawMeat == 0) {
+    document.getElementById("cook-raw-meat").classList.add("disabled");
+  }
+  if (isFireActive == 1 && rawMeat >= 1) {
+    document.getElementById("cook-raw-meat").classList.remove("disabled");
+  }
+  //Check if trap is build
+  if (isTrapBuilt == 0) {
+    document.getElementById("check-trap").classList.add("disabled");
+  }
+  if (isTrapBuilt == 1) {
+    document.getElementById("check-trap").classList.remove("disabled");
+  }
+
   if (cookedMeat >= 1) {
     if (hunger >= 100) {
       console.log("Already 100%")
@@ -38,6 +52,12 @@ document.getElementById("building-options").onclick = function () {
   document.getElementById("actionBox").classList.add("hidden")
   document.getElementById("buildingBox").classList.remove("hidden")
   document.getElementById("action-header").innerText = "Building Options"
+  if (wood >= 5) {
+    toggleLightFire();
+  }
+  if (wood >= 10) {
+    toggleBuildTrap();
+  }
 }
 
 document.getElementById("action-options").onclick = function () {
@@ -181,12 +201,6 @@ document.getElementById("wood-collection").onclick = function () {
     console.log("Yes I got " + wood + ' pieces of wood!')
     document.querySelector("#woodList span").innerText = wood;
   }
-  if (wood >= 5) {
-    toggleLightFire();
-  }
-  if (wood >= 10) {
-    toggleBuildTrap();
-  }
   if (wood % 5 == 0) {
     fillTextReader("You have collected " + wood + " pieces of wood.")
   }
@@ -195,14 +209,14 @@ document.getElementById("wood-collection").onclick = function () {
 // Light Fire
 
 function toggleLightFire() {
-  document.getElementById("light-fire").classList.toggle("disabled");
+  document.getElementById("light-fire").classList.remove("disabled");
 }
 
 document.getElementById("light-fire").onclick = function () {
   wood = wood - 5
   document.querySelector("#woodList span").innerText = wood;
   isFireActive = 1;
-  document.getElementById("cook-raw-meat").classList.toggle("disabled");
+  //document.getElementById("cook-raw-meat").classList.toggle("disabled");
   if (wood < 5) {
     toggleLightFire();
   }
@@ -211,22 +225,22 @@ document.getElementById("light-fire").onclick = function () {
 
 // Build Trap
 function toggleBuildTrap() {
-  document.getElementById("build-trap").classList.toggle("disabled");
+  document.getElementById("build-trap").classList.remove("disabled");
 }
 document.getElementById("build-trap").onclick = function () {
   wood = wood - 10
   document.querySelector("#woodList span").innerText = wood;
+  isTrapBuilt = 1
   if (wood < 15) {
     toggleBuildTrap();
   }
-  document.getElementById("check-trap").classList.toggle("disabled");
   fillTextReader("You built a trap, you can check if you have caught anything!")
 }
 
 document.getElementById("check-trap").onclick = function () {
+  isTrapBuilt = 0
   rawMeat += Math.round(Math.random() * 10)
   document.querySelector("#rawMeatList span").innerText = rawMeat;
-  document.getElementById("check-trap").classList.toggle("disabled");
   fillTextReader("You hear the trap go off... You obtained" + rawMeat + " pieces of raw meat!")
 }
 
