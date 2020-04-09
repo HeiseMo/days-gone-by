@@ -9,26 +9,70 @@ let isFireActive = 0;
 let isTrapBuilt = 0;
 let completedDays = 0;
 let txtReaderItemCount = 0;
-let riverside = 0;
+let isRiverside = 1;
+let campsite = 0;
 //
 console.log(document.getElementById("put-out-fire").parentElement)
 
 //Hunger Ticker
 let id = setInterval(function () {
   ticker++
+
+  //Function for switching to between rooms
+  if (isRiverside == 1) {
+    document.getElementById("stone-collection").parentElement.classList.remove("availableActions");
+    document.getElementById("stone-collection").classList.add("hidden");
+    document.getElementById("bamboo-collection").parentElement.classList.remove("availableActions");
+    document.getElementById("bamboo-collection").classList.add("hidden");
+    document.getElementById("strange-device").parentElement.classList.remove("availableActions")
+    document.getElementById("strange-device").classList.add("hidden")
+  }
+  if (isRiverside == 0) {
+    document.getElementById("stone-collection").parentElement.classList.add("availableActions");
+    document.getElementById("stone-collection").classList.remove("hidden");
+    document.getElementById("bamboo-collection").parentElement.classList.add("availableActions");
+    document.getElementById("bamboo-collection").classList.remove("hidden");
+    document.getElementById("strange-device").parentElement.classList.add("availableActions")
+    document.getElementById("strange-device").classList.remove("hidden")
+  }
+
+  if (campsite == 1) {
+    document.getElementById("wood-collection").parentElement.classList.remove("availableActions");
+    document.getElementById("wood-collection").classList.add("hidden");
+    document.getElementById("put-out-fire").parentElement.classList.remove("availableActions");
+    document.getElementById("put-out-fire").classList.add("hidden");
+    document.getElementById("check-trap").parentElement.classList.remove("availableActions");
+    document.getElementById("check-trap").classList.add("hidden");
+    document.getElementById("cook-raw-meat").parentElement.classList.remove("availableActions");
+    document.getElementById("cook-raw-meat").classList.add("hidden");
+    document.getElementById("building-options").classList.remove("optionButton");
+    document.getElementById("building-options").classList.add("hidden");
+  }
+  if (campsite == 0) {
+    document.getElementById("wood-collection").parentElement.classList.add("availableActions");
+    document.getElementById("wood-collection").classList.remove("hidden");
+    document.getElementById("put-out-fire").parentElement.classList.add("availableActions");
+    document.getElementById("put-out-fire").classList.remove("hidden");
+    document.getElementById("check-trap").parentElement.classList.add("availableActions");
+    document.getElementById("check-trap").classList.remove("hidden");
+    document.getElementById("cook-raw-meat").parentElement.classList.add("availableActions");
+    document.getElementById("cook-raw-meat").classList.remove("hidden");
+    document.getElementById("building-options").classList.add("optionButton");
+    document.getElementById("building-options").classList.remove("hidden");
+  }
   //Check if riverside location is active
   if (isFireActive == 1 && isTrapBuilt == 1) {
     riverside = 1;
     document.getElementById("riverside").classList.remove("disabled")
   }
   //Check if fire is alive
-  if (isFireActive == 1) {
+  if (isFireActive == 1 && campsite == 0) {
     document.getElementById("put-out-fire").parentElement.classList.add("availableActions")
     document.getElementById("put-out-fire").classList.remove("hidden")
     document.getElementById("light-fire").classList.add("disabled");
 
   }
-  if (isFireActive == 0) {
+  if (isFireActive == 0 && campsite == 0) {
     document.getElementById("put-out-fire").parentElement.classList.remove("availableActions")
     document.getElementById("put-out-fire").classList.add("hidden")
     document.getElementById("cook-raw-meat").parentElement.classList.remove("availableActions")
@@ -36,7 +80,7 @@ let id = setInterval(function () {
 
   }
   //Check if Fire is build and meat can be cooked
-  if (isFireActive == 1 && rawMeat >= 1) {
+  if (isFireActive == 1 && rawMeat >= 1 && campsite == 0) {
     document.getElementById("cook-raw-meat").parentElement.classList.add("availableActions")
     document.getElementById("cook-raw-meat").classList.remove("hidden");
     document.getElementById("cook-raw-meat").classList.remove("disable");
@@ -130,7 +174,6 @@ document.getElementById("play-button").onclick = function () {
 
   daysPassing();
   storyIntro();
-  removeRiverside();
   document.getElementById("action-header").innerText = "Available Actions"
   document.getElementById("hunBar").style.width = hunger + '%';
   let id = setInterval(function () {
@@ -152,17 +195,6 @@ document.getElementById("play-button").onclick = function () {
   }, 1000);
 
 };
-
-//Function for switching to riverside
-function removeRiverside() {
-  document.getElementById("stone-collection").parentElement.classList.remove("availableActions");
-  document.getElementById("stone-collection").classList.add("hidden");
-  document.getElementById("bamboo-collection").parentElement.classList.remove("availableActions");
-  document.getElementById("bamboo-collection").classList.add("hidden");
-  document.getElementById("strange-device").parentElement.classList.remove("availableActions")
-  document.getElementById("strange-device").classList.add("hidden")
-}
-
 
 //Function for Days passing by
 function daysPassing() {
@@ -304,7 +336,19 @@ document.getElementById("riverside").onclick = function () {
   document.getElementById("riverside").classList.add("activeLocationButton")
   document.getElementById("campsite").classList.remove("activeLocationButton")
   document.getElementById("campsite").classList.add("locationButton")
+  isRiverside = 0;
+  campsite = 1;
 }
+document.getElementById("campsite").onclick = function () {
+  document.getElementById("riverside").classList.add("locationButton")
+  document.getElementById("riverside").classList.remove("activeLocationButton")
+  document.getElementById("campsite").classList.add("activeLocationButton")
+  document.getElementById("campsite").classList.remove("locationButton")
+  campsite = 0;
+  isRiverside = 1;
+}
+
+
 
 // Functions for color switch
 
