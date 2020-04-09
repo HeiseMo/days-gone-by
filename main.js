@@ -9,26 +9,57 @@ let isFireActive = 0;
 let isTrapBuilt = 0;
 let completedDays = 0;
 let txtReaderItemCount = 0;
+let riverside = 0;
 //
+console.log(document.getElementById("put-out-fire").parentElement)
 
 //Hunger Ticker
 let id = setInterval(function () {
   ticker++
+  //Check if riverside location is active
+  if (isFireActive == 1 && isTrapBuilt == 1) {
+    riverside = 1;
+    document.getElementById("riverside").classList.remove("disabled")
+  }
+  //Check if fire is alive
+  if (isFireActive == 1) {
+    document.getElementById("put-out-fire").parentElement.classList.add("availableActions")
+    document.getElementById("put-out-fire").classList.remove("hidden")
+    document.getElementById("light-fire").classList.add("disabled");
+
+  }
+  if (isFireActive == 0) {
+    document.getElementById("put-out-fire").parentElement.classList.remove("availableActions")
+    document.getElementById("put-out-fire").classList.add("hidden")
+    document.getElementById("cook-raw-meat").parentElement.classList.remove("availableActions")
+    document.getElementById("cook-raw-meat").classList.add("hidden");
+
+  }
   //Check if Fire is build and meat can be cooked
-  if (rawMeat == 0) {
-    document.getElementById("cook-raw-meat").classList.add("disabled");
-  }
   if (isFireActive == 1 && rawMeat >= 1) {
-    document.getElementById("cook-raw-meat").classList.remove("disabled");
+    document.getElementById("cook-raw-meat").parentElement.classList.add("availableActions")
+    document.getElementById("cook-raw-meat").classList.remove("hidden");
+    document.getElementById("cook-raw-meat").classList.remove("disable");
   }
-  //Check if trap is build
-  if (isTrapBuilt == 0) {
-    document.getElementById("check-trap").classList.add("disabled");
+//Check if you can click Light Fire
+  if (isFireActive == 0 && wood > 4) {
+    document.getElementById("light-fire").classList.remove("disabled");
   }
-  if (isTrapBuilt == 1) {
-    document.getElementById("check-trap").classList.remove("disabled");
+  //Check if you can click Build Trap
+  if (isTrapBuilt == 0 && wood > 9) {
+    document.getElementById("build-trap").classList.remove("disabled");
   }
 
+  // Check if trap is set
+  if (isTrapBuilt == 1) {
+    document.getElementById("check-trap").classList.remove("disabled");
+    document.getElementById("build-trap").classList.add("disabled");
+  }
+  if (isTrapBuilt == 0) {
+    document.getElementById("check-trap").parentElement.classList.remove("availableActions")
+    document.getElementById("check-trap").classList.add("hidden");
+  }
+  //Hunger bar system with eating system
   if (cookedMeat >= 1) {
     if (hunger >= 100) {
       console.log("Already 100%")
@@ -52,21 +83,12 @@ document.getElementById("building-options").onclick = function () {
   document.getElementById("actionBox").classList.add("hidden")
   document.getElementById("buildingBox").classList.remove("hidden")
   document.getElementById("action-header").innerText = "Building Options"
-  if (wood >= 5) {
-    toggleLightFire();
-  }
-  if (wood >= 10) {
-    toggleBuildTrap();
-  }
 }
 
 document.getElementById("action-options").onclick = function () {
   document.getElementById("actionBox").classList.remove("hidden")
   document.getElementById("buildingBox").classList.add("hidden")
   document.getElementById("action-header").innerText = "Available Actions"
-  if (rawMeat > 1 && isFireActive == 1) {
-
-  }
 }
 
 
@@ -78,10 +100,6 @@ document.getElementById("light-fire").classList.toggle("disabled");
 //
 let i = 1;
 const txtReaderList = document.querySelectorAll(".textReader li");
-// document.getElementById("actionTest").onclick = function () {
-//   document.querySelector(".gameScreen span").innerText = i++;
-//   fillTextReader("Some random game action");
-// };
 
 //Restart Game
 document.getElementById("restartGame").onclick = function () {
@@ -208,39 +226,41 @@ document.getElementById("wood-collection").onclick = function () {
 
 // Light Fire
 
-function toggleLightFire() {
-  document.getElementById("light-fire").classList.remove("disabled");
-}
-
 document.getElementById("light-fire").onclick = function () {
-  wood = wood - 5
-  document.querySelector("#woodList span").innerText = wood;
-  isFireActive = 1;
-  //document.getElementById("cook-raw-meat").classList.toggle("disabled");
-  if (wood < 5) {
-    toggleLightFire();
+  if (wood > 4) {
+    wood = wood - 5
+    document.querySelector("#woodList span").innerText = wood;
+    isFireActive = 1;
   }
+
   fillTextReader("You lit a fire, you never felt so warm before.")
 }
 
-// Build Trap
-function toggleBuildTrap() {
-  document.getElementById("build-trap").classList.remove("disabled");
-}
-document.getElementById("build-trap").onclick = function () {
-  wood = wood - 10
-  document.querySelector("#woodList span").innerText = wood;
-  isTrapBuilt = 1
-  if (wood < 15) {
-    toggleBuildTrap();
-  }
-  fillTextReader("You built a trap, you can check if you have caught anything!")
+//Put out fire
+document.getElementById("put-out-fire").onclick = function () {
+  isFireActive = 0;
+  fillTextReader("You stomp out the fire.")
 }
 
+// Build Trap
+document.getElementById("build-trap").onclick = function () {
+  if (wood >= 10) {
+    wood = wood - 10
+    document.querySelector("#woodList span").innerText = wood;
+    isTrapBuilt = 1
+    document.getElementById("check-trap").parentElement.classList.add("availableActions")
+    document.getElementById("check-trap").classList.remove("hidden")
+    fillTextReader("You built a trap, you can check if you have caught anything!")
+  }
+
+}
+// Check Trap
 document.getElementById("check-trap").onclick = function () {
   isTrapBuilt = 0
   rawMeat += Math.round(Math.random() * 10)
   document.querySelector("#rawMeatList span").innerText = rawMeat;
+  document.getElementById("check-trap").parentElement.classList.remove("availableActions")
+  document.getElementById("check-trap").classList.add("hidden")
   fillTextReader("You hear the trap go off... You obtained" + rawMeat + " pieces of raw meat!")
 }
 
