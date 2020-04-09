@@ -41,7 +41,7 @@ let id = setInterval(function () {
     document.getElementById("cook-raw-meat").classList.remove("hidden");
     document.getElementById("cook-raw-meat").classList.remove("disable");
   }
-//Check if you can click Light Fire
+  //Check if you can click Light Fire
   if (isFireActive == 0 && wood > 4) {
     document.getElementById("light-fire").classList.remove("disabled");
   }
@@ -177,7 +177,7 @@ function storyIntro() {
     if (count == 2) return fillTextReader('The seat you were sitting on somehow managed to end up a couple of meters away from you, but the rest of the plane is missing.')
     if (count == 3) return fillTextReader('The smell you noticed before is still present and you assume its the plane, you just cant see it.')
     if (count == 4) return fillTextReader('You start to shiver, as you just notice how cold it is.')
-    if (count == 5) return fillTextReader('You notice some branches around your location.')
+    if (count == 5) return fillTextReader('You notice some branches around your location and the smell of cake.')
     if (count > 4) clearInterval();
   }, 1000);
 }
