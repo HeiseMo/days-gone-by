@@ -127,8 +127,10 @@ document.getElementById("play-button").onclick = function () {
   document
     .querySelector(".globalScreenHidden")
     .classList.toggle("globalScreen");
+
   daysPassing();
   storyIntro();
+  removeRiverside();
   document.getElementById("action-header").innerText = "Available Actions"
   document.getElementById("hunBar").style.width = hunger + '%';
   let id = setInterval(function () {
@@ -150,6 +152,17 @@ document.getElementById("play-button").onclick = function () {
   }, 1000);
 
 };
+
+//Function for switching to riverside
+function removeRiverside() {
+  document.getElementById("stone-collection").parentElement.classList.remove("availableActions");
+  document.getElementById("stone-collection").classList.add("hidden");
+  document.getElementById("bamboo-collection").parentElement.classList.remove("availableActions");
+  document.getElementById("bamboo-collection").classList.add("hidden");
+  document.getElementById("strange-device").parentElement.classList.remove("availableActions")
+  document.getElementById("strange-device").classList.add("hidden")
+}
+
 
 //Function for Days passing by
 function daysPassing() {
@@ -261,7 +274,7 @@ document.getElementById("check-trap").onclick = function () {
   document.querySelector("#rawMeatList span").innerText = rawMeat;
   document.getElementById("check-trap").parentElement.classList.remove("availableActions")
   document.getElementById("check-trap").classList.add("hidden")
-  fillTextReader("You hear the trap go off... You obtained" + rawMeat + " pieces of raw meat!")
+  fillTextReader("You hear the trap go off... You obtained " + rawMeat + " pieces of raw meat!")
 }
 
 document.getElementById("cook-raw-meat").onclick = function () {
@@ -286,7 +299,12 @@ document.getElementById("cook-raw-meat").onclick = function () {
 //   }
 // };
 
-
+document.getElementById("riverside").onclick = function () {
+  document.getElementById("riverside").classList.remove("locationButton")
+  document.getElementById("riverside").classList.add("activeLocationButton")
+  document.getElementById("campsite").classList.remove("activeLocationButton")
+  document.getElementById("campsite").classList.add("locationButton")
+}
 
 // Functions for color switch
 
