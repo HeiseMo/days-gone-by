@@ -275,6 +275,7 @@ function daysPassing() {
 }
 
 document.getElementById("the-question").onclick = function () {
+  endScreen = 1;
   fillTextReader("");
   fillTextReader("");
   fillTextReader("");
@@ -299,6 +300,7 @@ document.getElementById("the-question").onclick = function () {
 }
 //
 document.getElementById("the-answer").onclick = function () {
+  endScreen = 1;
   fillTextReader("");
   fillTextReader("");
   fillTextReader("");
@@ -310,8 +312,8 @@ document.getElementById("the-answer").onclick = function () {
   let time = 0;
   let timer = setInterval(function () {
     time++
-    if (time == 1) fillTextReader("You hear a strange voice 'World simulation number 9512 ended with the same resaut of the previous simulations,'");
-    if (time == 4) fillTextReader(" SYS MSG: Alert!!! Simulation delete squence has started");
+    if (time == 1) fillTextReader("You hear a strange voice 'World simulation number 9512 ended with the same result of the previous simulations,'");
+    if (time == 4) fillTextReader(" SYS MSG: Alert!!! Simulation delete sequence has started");
     if (time == 7) fillTextReader("Enjoy your cake!")
     if (time == 12) {
       location.reload();
@@ -479,48 +481,49 @@ document.getElementById("cook-raw-meat").onclick = function () {
 
 // Bear Attack
 document.getElementById("bear-attack").onclick = function () {
-  document.getElementById("bear-attack").classList.toggle("disabled")
-  let timeLeft = 5
-  let id = setInterval(function () {
-    timeLeft--
-
-    if (timeLeft == 0) {
-      document.getElementById("bear-attack").classList.toggle("disabled");
-      document.querySelector("#bear-attack span").innerText = ''
-      hasAttackedBear++
-      clearInterval(id)
-    } else if (timeLeft >= 0) {
-      document.querySelector("#bear-attack span").innerText = '(' + timeLeft + ')'
+  if (hunger > 80) {
+    document.getElementById("bear-attack").classList.toggle("disabled")
+    let timeLeft = 5
+    let id = setInterval(function () {
+      timeLeft--
+      if (timeLeft == 0) {
+        document.getElementById("bear-attack").classList.toggle("disabled");
+        document.querySelector("#bear-attack span").innerText = ''
+        hasAttackedBear++
+        clearInterval(id)
+      } else if (timeLeft >= 0) {
+        document.querySelector("#bear-attack span").innerText = '(' + timeLeft + ')'
+      }
+    }, 1000)
+    let ranNum = Math.round(Math.random() * 20)
+    if (ranNum > health) {
+      health = 0
     }
-  }, 1000)
-  let ranNum = Math.round(Math.random() * 30)
-  if (ranNum > health) {
-    health = 0
-  }
-  health -= ranNum
-  if (hasAttackedBear == 1) {
-    fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 4 more bears.")
-  }
-  if (hasAttackedBear == 2) {
-    fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 3 more bears.")
-    fillTextReader("You smell the cake, make sure to find the answer...")
-  }
-  if (hasAttackedBear == 3) {
-    fillTextReader("You hear loud laughter, it is deafening.")
-    fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 2 more bears.")
-  }
-  if (hasAttackedBear == 4) {
-    fillTextReader("Good... Good... You are on your last attack. Just a little more. You can do it")
-    fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 1 more bears.")
-  }
-  if (hasAttackedBear == 5) {
-    campsite = 1;
-    isRiverside = 1;
-    endScreen = 0;
-    finalSequence = 1
-    document.getElementById("game-locations").classList.toggle("disabled");
-    document.getElementById("game-screen").classList.toggle("disabled");
-  }
+    health -= ranNum
+    if (hasAttackedBear == 1) {
+      fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 4 more bears.")
+    }
+    if (hasAttackedBear == 2) {
+      fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 3 more bears.")
+      fillTextReader("You smell the cake, make sure to find the answer...")
+    }
+    if (hasAttackedBear == 3) {
+      fillTextReader("You hear loud laughter, it is deafening.")
+      fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 2 more bears.")
+    }
+    if (hasAttackedBear == 4) {
+      fillTextReader("Good... Good... You are on your last attack. Just a little more. You can do it")
+      fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 1 more bears.")
+    }
+    if (hasAttackedBear == 5) {
+      campsite = 1;
+      isRiverside = 1;
+      endScreen = 0;
+      finalSequence = 1
+      document.getElementById("game-locations").classList.toggle("disabled");
+      document.getElementById("game-screen").classList.toggle("disabled");
+    }
+  } else fillTextReader("You need to eat more meat! you cant be hungry while attacking the bear!")
 }
 
 document.getElementById("riverside").onclick = function () {

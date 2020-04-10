@@ -141,6 +141,10 @@ a {
 
 .instructions {
   height: 40vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 24px;
 }
 
 .globalScreenHidden {
