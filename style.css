@@ -305,6 +305,15 @@ a {
   height: 30%;
 }
 
+#invItems {
+  padding-top: 2vh;
+}
+
+#invItems>li {
+  list-style: none;
+  padding-left: 2vh;
+}
+
 .activeItems {
   border-left: 0.05em solid;
   width: 30vh;

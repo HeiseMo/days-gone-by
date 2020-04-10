@@ -15,9 +15,10 @@ let isRiverside = 1;
 let campsite = 0;
 let toggleBearAttack = 0;
 let totalBattle = 0;
-let hasAttackedBear = 0;
+let hasAttackedBear = 1;
+let endScreen = 1;
+let finalSequence = 0;
 //
-console.log(document.getElementById("put-out-fire").parentElement)
 
 //Hunger Ticker
 let id = setInterval(function () {
@@ -25,20 +26,32 @@ let id = setInterval(function () {
 
   //Function for switching to between rooms
   if (isRiverside == 1) {
-    document.getElementById("stone-collection").parentElement.classList.remove("availableActions");
-    document.getElementById("stone-collection").classList.add("hidden");
-    document.getElementById("bamboo-collection").parentElement.classList.remove("availableActions");
-    document.getElementById("bamboo-collection").classList.add("hidden");
+    // document.getElementById("stone-collection").parentElement.classList.remove("availableActions");
+    // document.getElementById("stone-collection").classList.add("hidden");
+    // document.getElementById("bamboo-collection").parentElement.classList.remove("availableActions");
+    // document.getElementById("bamboo-collection").classList.add("hidden");
     document.getElementById("strange-device").parentElement.classList.remove("availableActions")
     document.getElementById("strange-device").classList.add("hidden")
   }
   if (isRiverside == 0) {
-    document.getElementById("stone-collection").parentElement.classList.add("availableActions");
-    document.getElementById("stone-collection").classList.remove("hidden");
-    document.getElementById("bamboo-collection").parentElement.classList.add("availableActions");
-    document.getElementById("bamboo-collection").classList.remove("hidden");
+    // document.getElementById("stone-collection").parentElement.classList.add("availableActions");
+    // document.getElementById("stone-collection").classList.remove("hidden");
+    // document.getElementById("bamboo-collection").parentElement.classList.add("availableActions");
+    // document.getElementById("bamboo-collection").classList.remove("hidden");
     document.getElementById("strange-device").parentElement.classList.add("availableActions")
     document.getElementById("strange-device").classList.remove("hidden")
+  }
+  if (endScreen == 1) {
+    document.getElementById("the-question").parentElement.classList.remove("availableActions");
+    document.getElementById("the-question").classList.add("hidden");
+    document.getElementById("the-answer").parentElement.classList.remove("availableActions");
+    document.getElementById("the-answer").classList.add("hidden");
+  }
+  if (endScreen == 0) {
+    document.getElementById("the-question").parentElement.classList.add("availableActions");
+    document.getElementById("the-question").classList.remove("hidden");
+    document.getElementById("the-answer").parentElement.classList.add("availableActions");
+    document.getElementById("the-answer").classList.remove("hidden");
   }
 
   if (campsite == 1) {
@@ -135,8 +148,29 @@ let id = setInterval(function () {
     }
   }
   if (hunger <= 1) {
+    document.getElementById("game").classList.toggle("disabled");
     clearInterval(id)
   }
+  if (finalSequence == 1) {
+    finalSequence = 0;
+    let time = 0;
+    let timer = setInterval(function () {
+      time++
+      if (time == 1) fillTextReader("Congratulations... One final test awaits...");
+      if (time == 3) fillTextReader("You have two options before you.");
+      if (time == 5) fillTextReader("You can select the Answer to the Ultimate Question of Life, the Universe, and Everything");
+      if (time == 6) fillTextReader("or.............");
+      if (time == 8) fillTextReader("You can select the Ultimate Question");
+      if (time == 10) fillTextReader("Pick wisely the answer will get you some cake...");
+      if (time == 11) {
+        clearInterval(timer);
+      }
+    }, 1000)
+  }
+
+  document.getElementById("hBar").style.width = health + '%';
+  document.querySelector('.hStatusBarText span').innerText = health;
+
   console.log(ticker)
 }, 1000);
 
@@ -194,6 +228,9 @@ document.getElementById("play-button").onclick = function () {
   document.getElementById("hunBar").style.width = hunger + '%';
   let id = setInterval(function () {
     hunger--;
+    if (hasAttackedBear == 5) {
+      clearInterval(id);
+    }
     if (hunger >= 100) {
       hunger = 100;
     }
@@ -205,10 +242,15 @@ document.getElementById("play-button").onclick = function () {
       hunger = 0;
       document.getElementById("hunBar").style.width = hunger + '%';
       document.querySelector('.hunStatusBarText span').innerText = hunger;
-      fillTextReader('You collapse and starve to death on day ' + completedDays + ', oh well... you dont get the cake....');
+      let deathTimer = 0;
+      let deathOn = setInterval(function () {
+        deathTimer++
+        if (deathTimer == 1) fillTextReader('You collapse and starve to death on day ' + completedDays + ', oh well... you dont get the cake....');
+        if (deathTimer == 5) location.reload();
+      }, 1000)
       clearInterval(id);
     }
-  }, 1000);
+  }, 500);
 
 };
 
@@ -224,10 +266,61 @@ function daysPassing() {
       document.getElementById("daysGoneBy").innerText = completedDays += 1;
       if (count == 1) return fillTextReader(count + ' Day has passed since the crash...');
       fillTextReader(count + ' Days have passed since the crash..');
+
+    }
+    if (hasAttackedBear >= 5) {
+      clearInterval(id);
     }
   }, 20000);
 }
 
+document.getElementById("the-question").onclick = function () {
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  let time = 0;
+  let timer = setInterval(function () {
+    time++
+    if (time == 1) fillTextReader("You hear a strange voice 'Interesting, you have show genuine signs of curiosty'");
+    if (time == 4) fillTextReader("'As a reward I will let you live on'");
+    if (time == 7) fillTextReader("SYS MSG: Warning!!! Simulation delete sequence aborted")
+    if (time == 8) {
+      fillTextReader("SYS MSG: Congratulations you beat the game.. you can restart it from the link in the footer.")
+      clearInterval(timer)
+    }
+  }, 1000)
+
+
+}
+//
+document.getElementById("the-answer").onclick = function () {
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  fillTextReader("");
+  let time = 0;
+  let timer = setInterval(function () {
+    time++
+    if (time == 1) fillTextReader("You hear a strange voice 'World simulation number 9512 ended with the same resaut of the previous simulations,'");
+    if (time == 4) fillTextReader(" SYS MSG: Alert!!! Simulation delete squence has started");
+    if (time == 7) fillTextReader("Enjoy your cake!")
+    if (time == 12) {
+      location.reload();
+      clearInterval(timer)
+    }
+  }, 1000)
+
+
+}
 //Story Into Sequence
 
 function storyIntro() {
@@ -286,55 +379,55 @@ document.getElementById("wood-collection").onclick = function () {
 };
 
 //Collect Stone
-document.getElementById("stone-collection").onclick = function () {
-  rand = Math.round(Math.random() * 10)
-  stone += (rand * 2)
-  document.getElementById("stone-collection").classList.toggle("disabled")
-  let timeLeft = 6
-  let id = setInterval(function () {
-    timeLeft--
-    if (timeLeft == 0) {
-      document.getElementById("stone-collection").classList.toggle("disabled");
-      document.querySelector("#stone-collection span").innerText = '';
-      clearInterval(id)
-    } else if (timeLeft >= 0) {
-      document.querySelector("#stone-collection span").innerText = '(' + timeLeft + ')'
-    }
-  }, 1000)
+// document.getElementById("stone-collection").onclick = function () {
+//   rand = Math.round(Math.random() * 10)
+//   stone += (rand * 2)
+//   document.getElementById("stone-collection").classList.toggle("disabled")
+//   let timeLeft = 6
+//   let id = setInterval(function () {
+//     timeLeft--
+//     if (timeLeft == 0) {
+//       document.getElementById("stone-collection").classList.toggle("disabled");
+//       document.querySelector("#stone-collection span").innerText = '';
+//       clearInterval(id)
+//     } else if (timeLeft >= 0) {
+//       document.querySelector("#stone-collection span").innerText = '(' + timeLeft + ')'
+//     }
+//   }, 1000)
 
-  if (stone > 0) {
-    console.log("Yes I got " + stone + ' pieces of stone!')
-    document.querySelector("#stoneList span").innerText = stone;
-  }
-  if (stone % 5 == 0) {
-    fillTextReader("You have collected " + stone + " pieces of stone.")
-  }
-};
+//   if (stone > 0) {
+//     console.log("Yes I got " + stone + ' pieces of stone!')
+//     document.querySelector("#stoneList span").innerText = stone;
+//   }
+//   if (stone % 5 == 0) {
+//     fillTextReader("You have collected " + stone + " pieces of stone.")
+//   }
+// };
 
 //Collect Bamboo
-document.getElementById("bamboo-collection").onclick = function () {
-  bamboo += 1;
-  document.getElementById("bamboo-collection").classList.toggle("disabled")
-  let timeLeft = 1
-  let id = setInterval(function () {
-    timeLeft--
-    if (timeLeft == 0) {
-      document.getElementById("bamboo-collection").classList.toggle("disabled");
-      document.querySelector("#bamboo-collection span").innerText = '';
-      clearInterval(id)
-    } else if (timeLeft >= 0) {
-      document.querySelector("#bamboo-collection span").innerText = '(' + timeLeft + ')'
-    }
-  }, 1000)
+// document.getElementById("bamboo-collection").onclick = function () {
+//   bamboo += 1;
+//   document.getElementById("bamboo-collection").classList.toggle("disabled")
+//   let timeLeft = 1
+//   let id = setInterval(function () {
+//     timeLeft--
+//     if (timeLeft == 0) {
+//       document.getElementById("bamboo-collection").classList.toggle("disabled");
+//       document.querySelector("#bamboo-collection span").innerText = '';
+//       clearInterval(id)
+//     } else if (timeLeft >= 0) {
+//       document.querySelector("#bamboo-collection span").innerText = '(' + timeLeft + ')'
+//     }
+//   }, 1000)
 
-  if (bamboo > 0) {
-    console.log("Yes I got " + bamboo + ' pieces of bamboo!')
-    document.querySelector("#bambooList span").innerText = bamboo;
-  }
-  if (bamboo % 5 == 0) {
-    fillTextReader("You have collected " + bamboo + " pieces of bamboo.")
-  }
-};
+//   if (bamboo > 0) {
+//     console.log("Yes I got " + bamboo + ' pieces of bamboo!')
+//     document.querySelector("#bambooList span").innerText = bamboo;
+//   }
+//   if (bamboo % 5 == 0) {
+//     fillTextReader("You have collected " + bamboo + " pieces of bamboo.")
+//   }
+// };
 
 
 // Light Fire
@@ -390,14 +483,44 @@ document.getElementById("bear-attack").onclick = function () {
   let timeLeft = 5
   let id = setInterval(function () {
     timeLeft--
+
     if (timeLeft == 0) {
       document.getElementById("bear-attack").classList.toggle("disabled");
+      document.querySelector("#bear-attack span").innerText = ''
       hasAttackedBear++
       clearInterval(id)
     } else if (timeLeft >= 0) {
       document.querySelector("#bear-attack span").innerText = '(' + timeLeft + ')'
     }
   }, 1000)
+  let ranNum = Math.round(Math.random() * 30)
+  if (ranNum > health) {
+    health = 0
+  }
+  health -= ranNum
+  if (hasAttackedBear == 1) {
+    fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 4 more bears.")
+  }
+  if (hasAttackedBear == 2) {
+    fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 3 more bears.")
+    fillTextReader("You smell the cake, make sure to find the answer...")
+  }
+  if (hasAttackedBear == 3) {
+    fillTextReader("You hear loud laughter, it is deafening.")
+    fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 2 more bears.")
+  }
+  if (hasAttackedBear == 4) {
+    fillTextReader("Good... Good... You are on your last attack. Just a little more. You can do it")
+    fillTextReader("You attacked a bear and you took " + ranNum + " amount of damage. You need to kill 1 more bears.")
+  }
+  if (hasAttackedBear == 5) {
+    campsite = 1;
+    isRiverside = 1;
+    endScreen = 0;
+    finalSequence = 1
+    document.getElementById("game-locations").classList.toggle("disabled");
+    document.getElementById("game-screen").classList.toggle("disabled");
+  }
 }
 
 document.getElementById("riverside").onclick = function () {
