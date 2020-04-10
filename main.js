@@ -18,12 +18,38 @@ let totalBattle = 0;
 let hasAttackedBear = 1;
 let endScreen = 1;
 let finalSequence = 0;
+let start = 1
 //
 
 //Hunger Ticker
 let id = setInterval(function () {
   ticker++
-
+  if (start == 1) console.log("hunger hasnt started")
+  if (start == 0) {
+    hunger--;
+    if (hasAttackedBear == 6) {
+      clearInterval(id);
+    }
+    if (hunger >= 100) {
+      hunger = 100;
+    }
+    if (hunger >= 0) {
+      document.getElementById("hunBar").style.width = hunger + '%';
+      document.querySelector('.hunStatusBarText span').innerText = hunger;
+    }
+    if (hunger < 1) {
+      hunger = 0;
+      document.getElementById("hunBar").style.width = hunger + '%';
+      document.querySelector('.hunStatusBarText span').innerText = hunger;
+      let deathTimer = 0;
+      let deathOn = setInterval(function () {
+        deathTimer++
+        if (deathTimer == 1) fillTextReader('You collapse and starve to death on day ' + completedDays + ', oh well... you dont get the cake....');
+        if (deathTimer == 5) location.reload();
+      }, 1000)
+      clearInterval(id);
+    }
+  }
   //Function for switching to between rooms
   if (isRiverside == 1) {
     // document.getElementById("stone-collection").parentElement.classList.remove("availableActions");
@@ -226,32 +252,7 @@ document.getElementById("play-button").onclick = function () {
   storyIntro();
   document.getElementById("action-header").innerText = "Available Actions"
   document.getElementById("hunBar").style.width = hunger + '%';
-  let id = setInterval(function () {
-    hunger--;
-    if (hasAttackedBear == 5) {
-      clearInterval(id);
-    }
-    if (hunger >= 100) {
-      hunger = 100;
-    }
-    if (hunger >= 0) {
-      document.getElementById("hunBar").style.width = hunger + '%';
-      document.querySelector('.hunStatusBarText span').innerText = hunger;
-    }
-    if (hunger < 1) {
-      hunger = 0;
-      document.getElementById("hunBar").style.width = hunger + '%';
-      document.querySelector('.hunStatusBarText span').innerText = hunger;
-      let deathTimer = 0;
-      let deathOn = setInterval(function () {
-        deathTimer++
-        if (deathTimer == 1) fillTextReader('You collapse and starve to death on day ' + completedDays + ', oh well... you dont get the cake....');
-        if (deathTimer == 5) location.reload();
-      }, 1000)
-      clearInterval(id);
-    }
-  }, 500);
-
+  start = 0;
 };
 
 //Function for Days passing by
@@ -287,7 +288,7 @@ document.getElementById("the-question").onclick = function () {
   let time = 0;
   let timer = setInterval(function () {
     time++
-    if (time == 1) fillTextReader("You hear a strange voice 'Interesting, you have show genuine signs of curiosty'");
+    if (time == 1) fillTextReader("You hear a strange voice 'Interesting, you have shown genuine signs of curiosty'");
     if (time == 4) fillTextReader("'As a reward I will let you live on'");
     if (time == 7) fillTextReader("SYS MSG: Warning!!! Simulation delete sequence aborted")
     if (time == 8) {
