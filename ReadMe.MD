@@ -9,10 +9,11 @@ Clicker game with RPG elements where you must complete certain actions to surviv
 	
 ## Technologies
 Project is created with:
-* React.js
-* Bootstrap
-* Node.js
-* MongoDB
+* Javascript
+* HTML
+* CSS
+* DOM
+
 	
 
 ## The Game
