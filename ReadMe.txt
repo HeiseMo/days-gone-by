@@ -1,8 +1,20 @@
-Name: 
-Days Gone By
+# Days Gone By - Game
 
-Idea for the game in its shortest form: 
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
 
--Clicker game with RPG elements where you must complete certain actions to survive until help comes along
+## General info
+Clicker game with RPG elements where you must complete certain actions to survive until help comes along
+	
+## Technologies
+Project is created with:
+* React.js
+* Bootstrap
+* Node.js
+* MongoDB
+	
+
+## The Game
 
 https://heisemo.github.io/days-gone-by/
