@@ -3,7 +3,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [The Game](#The Game)
+* [The Game](#the-game)
 
 ## General info
 Clicker game with RPG elements where you must complete certain actions to survive until help comes along
